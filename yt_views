@@ -35,3 +35,100 @@ else {
 }
 console.log( "total_views = " + total_views )
 
+
+
+
+
+
+SOURCE: https://github.com/amnrst/youtube-like-to-view-ratio
+
+const getStats = () => {
+        const likesEl = document.querySelector('[aria-label^="like this video along with"]') || document.querySelector('[aria-label$="likes"]') ;
+        const viewsEl = document.querySelector('#above-the-fold #description-inner tp-yt-paper-tooltip #tooltip') ||
+                        document.querySelector('.style-scope .ytd-watch-info-text #info span') ;
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        
+var viewsEl = document.querySelector('.style-scope .ytd-watch-info-text #info span').innerText
+//console.log("viewsEl = ") 
+var patr = /\d+(,)?\d+/
+var multip = /[KM]/
+
+// console.log(viewsEl) 
+
+var vu_num = viewsEl.match(patr)
+var vu_multiplier = viewsEl.match(multip) || 'A'
+
+//var vu = parseInt(v_data)
+//console.log("vu = ")
+//console.log(vu_num[0])
+//console.log( "multip = " + multip)
+//console.log("vu_multiplier = " + vu_multiplier[0])
+
+var total_views 
+if (vu_multiplier == 'K') { total_views = vu_num[0] * 1000 } 
+        else if(vu_multiplier == 'M') { total_views = vu_num[0] * 1000000 }
+else {
+  total_views = vu_num[0]
+}
+console.log( "total_views = " + total_views )
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+        if (!viewsEl || !likesEl) return null;
+
+        const views = viewsEl.innerText.split("views")[0];
+        const likes = likesEl.getAttribute("aria-label");
+
+    if (views.includes("watching now")) return null;
+        return {
+                likes: likes.replace(/\D/g, '') * 1,
+                views: views.replace(/\D/g, '') * 1,
+                viewsEl,
+                likesEl,
+        };
+};
+
+function showStats({ likes, views }) {
+        const percentage = (100 * likes / views).toFixed(2);
+        const likeDiv = document.querySelector('#top-row #actions #segmented-like-button yt-button-shape button div:nth-child(2)');
+        let span = likeDiv.querySelector('span.yt-like-to-view-ratio')
+        if (!span) {
+                span = document.createElement('span');
+        span.classList.add('yt-like-to-view-ratio');
+                span.style['padding'] = '0 0.6em';
+                span.style['font-weight'] = 'bold';
+                likeDiv.append(span);
+
+        likeDiv.parentElement.addEventListener('click', () => showStats({likes, views}));
+        }
+        span.innerText = `(${percentage}%)`
+}
+
+let holdBackTimer = null;
+function hodlBack() {
+        if (window.location.href.indexOf("watch?") >= 0) {
+                clearInterval(holdBackTimer);
+                holdBackTimer = setInterval(() => {
+                        const stats = getStats();
+
+                        if (stats) {
+                                clearInterval(holdBackTimer);
+                                holdBackTimer = null;
+                                showStats(stats);
+                        }
+                }, 150);
+        }
+}
+
+hodlBack();
+document.addEventListener("yt-navigate-finish", hodlBack);                                                            
+
+
+
+
+
+
+
