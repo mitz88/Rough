@@ -1,1 +1,14 @@
+
+
+<yt-formatted-string id="info" class="style-scope ytd-watch-info-text">
+<span dir="auto" class="style-scope yt-formatted-string bold" style-target="bold">24K views
+</span>
+<span dir="auto" class="style-scope yt-formatted-string bold" style-target="bold">  
+</span>
+<span dir="auto" class="style-scope yt-formatted-string bold" style-target="bold">3 years ago
+</span>
+</yt-formatted-string>
+
+
+
 document.querySelector('.style-scope .ytd-watch-info-text #info span').innerText
