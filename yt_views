@@ -127,6 +127,12 @@ hodlBack();
 document.addEventListener("yt-navigate-finish", hodlBack);                                                            
 
 
+connect to wifi
+increase keyboard lights to maximium
+reduce laptop screen brightness to 33%
+set timezone for ubuntu
+toggle firefox tabs
+
 
 
 
