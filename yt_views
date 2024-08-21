@@ -10,5 +10,5 @@
 </yt-formatted-string>
 
 
-
+Resource: https://youtu.be/JlgLDfINXvY?si=4MJB16RB4pdDwQE1 @4:30
 document.querySelector('.style-scope .ytd-watch-info-text #info span').innerText
