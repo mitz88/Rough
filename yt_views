@@ -1,0 +1,1 @@
+document.querySelector('.style-scope .ytd-watch-info-text #info span').innerText
