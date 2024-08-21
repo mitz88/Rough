@@ -12,3 +12,26 @@
 
 Resource: https://youtu.be/JlgLDfINXvY?si=4MJB16RB4pdDwQE1 @4:30
 document.querySelector('.style-scope .ytd-watch-info-text #info span').innerText
+
+
+
+var v_data = document.querySelector('.style-scope .ytd-watch-info-text #info span').innerText
+console.log("vdata = ")
+var patr = /\d+(,)?\d+/
+var multip = /[KM]/
+console.log(v_data)
+var vu_num = v_data.match(patr)
+var vu_multiplier = v_data.match(multip) || 'A'
+/*var vu = parseInt(v_data)*/
+console.log("vu = ")
+console.log(vu_num[0])
+console.log( "multip = " + multip)
+console.log("vu_multiplier = " + vu_multiplier[0])
+var total_views 
+if (vu_multiplier == 'K') { total_views = vu_num[0] * 1000 } 
+	else if(vu_multiplier == 'M') { total_views = vu_num[0] * 1000000 }
+else {
+  total_views = vu_num[0]
+}
+console.log( "total_views = " + total_views )
+
